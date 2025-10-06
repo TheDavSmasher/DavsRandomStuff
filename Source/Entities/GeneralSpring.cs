@@ -55,7 +55,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 
 		protected new void OnCollide(Player player)
 		{
-			if (!playerCanUse || IgnorePlayerCollision(player))
+			if (player.StateMachine.State == Player.StDreamDash  || !playerCanUse || IgnorePlayerCollision(player))
 				return;
 
 			if (!Enum.IsDefined(Orientation) && Orientation != Ceiling)

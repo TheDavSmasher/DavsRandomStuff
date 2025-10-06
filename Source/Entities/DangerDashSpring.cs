@@ -23,8 +23,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 
 		protected override bool IgnorePlayerCollision(Player player)
 		{
-			if (ignoreRedBoosters && player.StateMachine.State == Player.StRedDash ||
-				player.StateMachine.State == Player.StDreamDash || !player.DashAttacking)
+			if (ignoreRedBoosters && player.StateMachine.State == Player.StRedDash || !player.DashAttacking)
 			{
 				player.Die((player.Position - Position).SafeNormalize());
 				return true;
