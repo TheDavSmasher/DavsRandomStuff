@@ -4,10 +4,12 @@ using Monocle;
 
 namespace Celeste.Mod.DavsRandomStuff.Entities
 {
-	[CustomEntity("DavsRandomStuff/DangerDashSpringUp", "DavsRandomStuff/DangerDashSpringRight", "DavsRandomStuff/DangerDashSpringLeft", "DavsRandomStuff/DangerDashSpringDown")]
+	[CustomEntity($"{ClassName}Up", $"{ClassName}Right", $"{ClassName}Left", $"{ClassName}Down")]
 	public class DangerDashSpring : GeneralSpring
 	{
 		private readonly bool ignoreRedBoosters;
+
+		private const string ClassName = "DavsRandomStuff/DangerDashSpring";
 
 		public DangerDashSpring(Vector2 position, Orientations orientation, string spritePath, bool playerCanUse, bool ignoreHoldables, bool ignoreRedBubble)
 			: base(position, orientation, spritePath, playerCanUse, ignoreHoldables)
@@ -16,7 +18,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 		}
 
 		public DangerDashSpring(EntityData data, Vector2 offset)
-			: base(data, offset, "DavsRandomStuff/DangerDashSpring")
+			: base(data, offset, ClassName)
 		{
 			ignoreRedBoosters = data.Bool("ignoreRedBoosters", false);
 		}
