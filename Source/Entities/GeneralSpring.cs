@@ -18,7 +18,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 				Remove(Get<HoldableCollider>());
 			}
 
-			Get<PlayerCollider>().OnCollide = OnCollide;
+			Get<PlayerCollider>().OnCollide = OnPlayerCollide;
 			sprite.Reset(GFX.Game, spritePath);
 			sprite.Add("idle", "", 0f, default(int));
 			sprite.Add("bounce", "", 0.07f, "idle", 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 5);
@@ -53,7 +53,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			};
 		}
 
-		protected new void OnCollide(Player player)
+		protected void OnPlayerCollide(Player player)
 		{
 			if (player.StateMachine.State == Player.StDreamDash  || !playerCanUse || IgnorePlayerCollision(player))
 				return;
@@ -61,11 +61,11 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			if (!Enum.IsDefined(Orientation) && Orientation != Ceiling)
 				throw new Exception("Orientation not supported!");
 
-			OnPlayerCollide(player);
+			OnCollide(player);
 		}
 
 		protected virtual bool IgnorePlayerCollision(Player player) => false;
 
-		protected abstract void OnPlayerCollide(Player player);
+		protected new abstract void OnCollide(Player player);
 	}
 }

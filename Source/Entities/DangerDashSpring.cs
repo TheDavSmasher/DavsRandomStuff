@@ -31,7 +31,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			return false;
 		}
 
-		protected override void OnPlayerCollide(Player player)
+		protected override void OnCollide(Player player)
 		{
 			switch (Orientation)
 			{
