@@ -8,30 +8,19 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 	{
 		public const Orientations Ceiling = (Orientations)3;
 
+		public bool ignoreHoldables;
+
 		public GeneralSpring(Vector2 position, Orientations orientation, string spritePath, bool playerCanUse, bool ignoreHoldables)
 			: base(position, orientation == Ceiling ? Orientations.Floor : orientation, playerCanUse)
 		{
 			Orientation = orientation;
-
-			if (ignoreHoldables)
-			{
-				Remove(Get<HoldableCollider>());
-			}
-
+			this.ignoreHoldables = ignoreHoldables;
+			
 			Get<PlayerCollider>().OnCollide = OnCollide;
 			Get<PufferCollider>().OnCollide = OnPuffer;
+			Get<HoldableCollider>().OnCollide = OnHoldable;
 
-			HoldableCollider holdable = Get<HoldableCollider>();
-			if (ignoreHoldables)
-			{
-				Remove(holdable);
-			}
-			else
-			{
-				holdable.OnCollide = OnHoldable;
-			}
-
-				sprite.Reset(GFX.Game, spritePath);
+			sprite.Reset(GFX.Game, spritePath);
 			sprite.Add("idle", "", 0f, default(int));
 			sprite.Add("bounce", "", 0.07f, "idle", 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 5);
 			sprite.Add("disabled", "white", 0.07f);
@@ -94,7 +83,12 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			}
 		}
 
-		protected new virtual void OnHoldable(Holdable h) => base.OnHoldable(h);
+		protected new virtual void OnHoldable(Holdable h)
+		{
+			if (ignoreHoldables)
+				return;
+			base.OnHoldable(h);
+		}
 
 		protected new virtual void OnPuffer(Puffer p) => base.OnPuffer(p);
 	}
