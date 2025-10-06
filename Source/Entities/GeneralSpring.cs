@@ -18,8 +18,20 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 				Remove(Get<HoldableCollider>());
 			}
 
-			Get<PlayerCollider>().OnCollide = OnPlayerCollide;
-			sprite.Reset(GFX.Game, spritePath);
+			Get<PlayerCollider>().OnCollide = OnCollide;
+			Get<PufferCollider>().OnCollide = OnPuffer;
+
+			HoldableCollider holdable = Get<HoldableCollider>();
+			if (ignoreHoldables)
+			{
+				Remove(holdable);
+			}
+			else
+			{
+				holdable.OnCollide = OnHoldable;
+			}
+
+				sprite.Reset(GFX.Game, spritePath);
 			sprite.Add("idle", "", 0f, default(int));
 			sprite.Add("bounce", "", 0.07f, "idle", 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 5);
 			sprite.Add("disabled", "white", 0.07f);
@@ -53,17 +65,37 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			};
 		}
 
-		protected void OnPlayerCollide(Player player)
+		protected new virtual void OnCollide(Player player)
 		{
-			if (player.StateMachine.State == Player.StDreamDash  || !playerCanUse)
+			if (player.StateMachine.State == Player.StDreamDash || !playerCanUse)
 				return;
 
 			if (!Enum.IsDefined(Orientation) && Orientation != Ceiling)
 				throw new Exception("Orientation not supported!");
 
-			OnCollide(player);
+			switch (Orientation)
+			{
+				case Orientations.Floor when player.Speed.Y >= 0f:
+					BounceAnimate();
+					player.SuperBounce(Top);
+					break;
+				case Orientations.WallLeft when player.SideBounce(1, Right, CenterY):
+					BounceAnimate();
+					break;
+				case Orientations.WallRight when player.SideBounce(-1, Left, CenterY):
+					BounceAnimate();
+					break;
+				case Ceiling when player.Speed.Y <= 0f:
+					BounceAnimate();
+					player.SuperBounce(Bottom + player.Height);
+					player.varJumpSpeed = player.Speed.Y = 185f;
+					SceneAs<Level>().DirectionalShake(Vector2.UnitY, 0.1f);
+					break;
+			}
 		}
 
-		protected new abstract void OnCollide(Player player);
+		protected new virtual void OnHoldable(Holdable h) => base.OnHoldable(h);
+
+		protected new virtual void OnPuffer(Puffer p) => base.OnPuffer(p);
 	}
 }
