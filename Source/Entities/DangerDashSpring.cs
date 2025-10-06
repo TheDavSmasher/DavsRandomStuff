@@ -21,18 +21,13 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			ignoreRedBoosters = data.Bool("ignoreRedBoosters", false);
 		}
 
-		protected override bool IgnorePlayerCollision(Player player)
+		protected override void OnCollide(Player player)
 		{
 			if (ignoreRedBoosters && player.StateMachine.State == Player.StRedDash || !player.DashAttacking)
 			{
 				player.Die((player.Position - Position).SafeNormalize());
-				return true;
+				return;
 			}
-			return false;
-		}
-
-		protected override void OnCollide(Player player)
-		{
 			switch (Orientation)
 			{
 				case Orientations.Floor when player.Speed.Y >= 0f:
