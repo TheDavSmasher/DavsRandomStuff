@@ -62,24 +62,29 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			if (!Enum.IsDefined(Orientation) && Orientation != Ceiling)
 				throw new Exception("Orientation not supported!");
 
-			switch (Orientation)
+			bool canBounceAnimate = Orientation switch
 			{
-				case Orientations.Floor when player.Speed.Y >= 0f:
-					BounceAnimate();
-					player.SuperBounce(Top);
-					break;
-				case Orientations.WallLeft when player.SideBounce(1, Right, CenterY):
-					BounceAnimate();
-					break;
-				case Orientations.WallRight when player.SideBounce(-1, Left, CenterY):
-					BounceAnimate();
-					break;
-				case Ceiling when player.Speed.Y <= 0f:
-					BounceAnimate();
-					player.SuperBounce(Bottom + player.Height);
-					player.varJumpSpeed = player.Speed.Y = 185f;
-					SceneAs<Level>().DirectionalShake(Vector2.UnitY, 0.1f);
-					break;
+				Orientations.Floor => player.Speed.Y >= 0f,
+				Orientations.WallLeft => player.SideBounce(1, Right, CenterY),
+				Orientations.WallRight => player.SideBounce(-1, Right, CenterY),
+				Ceiling => player.Speed.Y <= 0f,
+				_ => false
+			};
+
+			if (canBounceAnimate)
+			{
+				BounceAnimate();
+				switch (Orientation)
+				{
+					case Orientations.Floor:
+						player.SuperBounce(Top);
+						break;
+					case Ceiling:
+						player.SuperBounce(Bottom + player.Height);
+						player.varJumpSpeed = player.Speed.Y = 185f;
+						SceneAs<Level>().DirectionalShake(Vector2.UnitY, 0.1f);
+						break;
+				}
 			}
 		}
 
