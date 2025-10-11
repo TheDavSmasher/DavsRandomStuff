@@ -1,13 +1,17 @@
 local utils = require("utils")
 
+local modName = "DavsRandomStuff"
+
 local function getPlacement(name, rotation, xOff, yOff, x, y)
   local spring = {}
-  local springPath = "DavsRandomStuff/DangerDashSpring"
 
-  spring.name = springPath .. name
+  local springType =  modName .. "/DangerDashSpring"
+  local spritePath = "objects/" .. springType .."/"
+
+  spring.name = springType .. name
   spring.depth = -8501
   spring.justification = {0.5, 1.0}
-  spring.texture = "objects/".. springPath .."/00"
+  spring.texture = spritePath .. "00"
   spring.rotation = rotation
   spring.selection = function (room, entity)
     return utils.rectangle(entity.x - xOff, entity.y - yOff, x, y)
@@ -15,7 +19,7 @@ local function getPlacement(name, rotation, xOff, yOff, x, y)
   spring.placements = {
     name = string.lower(name),
     data = {
-      spritePath = "objects/".. springPath .."/",
+      spritePath = spritePath,
       playerCanUse = true,
       ignoreHoldables = false,
       ignoreRedBoosters = false
