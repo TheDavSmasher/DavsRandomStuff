@@ -1,11 +1,11 @@
 local utils = require("utils")
 
 local modName = "DavsRandomStuff"
+local springType =  modName .. "/DangerDashSpring"
 
 local function getPlacement(name, rotation, xOff, yOff, x, y)
   local spring = {}
 
-  local springType =  modName .. "/DangerDashSpring"
   local spritePath = "objects/" .. springType .."/"
 
   spring.name = springType .. name
