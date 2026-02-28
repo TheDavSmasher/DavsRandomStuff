@@ -11,7 +11,8 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 
 		private const string ClassName = "DavsRandomStuff/DangerDashSpring";
 
-		public DangerDashSpring(Vector2 position, Orientations orientation, string spritePath, bool playerCanUse, bool ignoreHoldables, bool ignoreRedBubble)
+		public DangerDashSpring(Vector2 position, Orientations orientation, string spritePath,
+			bool playerCanUse = true, bool ignoreHoldables = false, bool ignoreRedBubble = false)
 			: base(position, orientation, spritePath, playerCanUse, ignoreHoldables)
 		{
 			ignoreRedBoosters = ignoreRedBubble;

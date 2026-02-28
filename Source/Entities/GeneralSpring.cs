@@ -10,7 +10,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 
 		public bool ignoreHoldables;
 
-		public GeneralSpring(Vector2 position, Orientations orientation, string spritePath, bool playerCanUse, bool ignoreHoldables)
+		public GeneralSpring(Vector2 position, Orientations orientation, string spritePath, bool playerCanUse = true, bool ignoreHoldables = false)
 			: base(position, orientation == Ceiling ? Orientations.Floor : orientation, playerCanUse)
 		{
 			Orientation = orientation;
