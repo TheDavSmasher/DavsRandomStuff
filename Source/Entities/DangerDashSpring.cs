@@ -7,7 +7,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 	[CustomEntity($"{ClassName}Up", $"{ClassName}Right", $"{ClassName}Left", $"{ClassName}Down")]
 	public class DangerDashSpring : GeneralSpring
 	{
-		private readonly bool ignoreRedBoosters;
+		public bool ignoreRedBoosters;
 
 		private const string ClassName = "DavsRandomStuff/DangerDashSpring";
 
