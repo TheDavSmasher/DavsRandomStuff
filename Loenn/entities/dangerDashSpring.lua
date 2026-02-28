@@ -29,13 +29,13 @@ local function getPlacement(name, rotation, xOff, yOff, x, y)
   return spring
 end
 
-local springUp = getPlacement("Up", nil, 8, 4, 15, 4)
+local springUp = getPlacement("Up", nil, 6, 5, 12, 5)
 
-local springDown = getPlacement("Down", math.pi, 7, 0, 15, 4)
+local springDown = getPlacement("Down", math.pi, 6, 0, 12, 5)
 
-local springLeft = getPlacement("Left", math.pi / 2, 0, 8, 4, 15)
+local springLeft = getPlacement("Left", math.pi / 2, 0, 6, 5, 12)
 
-local springRight = getPlacement("Right", -math.pi / 2, 4, 7, 4, 15)
+local springRight = getPlacement("Right", -math.pi / 2, 5, 6, 5, 12)
 
 return {
   springUp,
