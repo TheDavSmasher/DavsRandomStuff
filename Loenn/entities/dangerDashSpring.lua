@@ -20,6 +20,7 @@ local function getPlacement(name, rotation, xOff, yOff, x, y)
     name = string.lower(name),
     data = {
       spritePath = spritePath,
+      spikesPath = spritePath,
       playerCanUse = true,
       ignoreHoldables = false,
       ignoreRedBoosters = false

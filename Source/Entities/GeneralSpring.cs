@@ -25,8 +25,6 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			sprite.Add("bounce", "", 0.07f, "idle", 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 5);
 			sprite.Add("disabled", "white", 0.07f);
 			sprite.Play("idle");
-			sprite.Origin.X = sprite.Width / 2f;
-			sprite.Origin.Y = sprite.Height;
 			if (orientation == Ceiling)
 			{
 				staticMover.SolidChecker = (s) => CollideCheck(s, Position - Vector2.UnitY);
