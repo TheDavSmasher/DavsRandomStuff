@@ -36,6 +36,8 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			spikes.Reset(GFX.Game, path);
 			spikes.Add("idle", "spikes");
 			spikes.Play("idle");
+			spikes.Rotation = sprite.Rotation;
+			spikes.Origin -= Vector2.UnitY;
 		}
 
 		protected override void OnCollide(Player player)
