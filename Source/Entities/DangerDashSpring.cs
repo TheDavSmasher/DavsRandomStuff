@@ -9,15 +9,18 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 	{
 		public bool ignoreRedBoosters;
 
+		public bool spikesOutline;
+
 		public Sprite spikes;
 
 		private const string ClassName = "DavsRandomStuff/DangerDashSpring";
 
 		public DangerDashSpring(Vector2 position, Orientations orientation, string spritePath, string spikesPath,
-			bool playerCanUse = true, bool ignoreHoldables = false, bool ignoreRedBubble = false)
+			bool spikesOutline, bool playerCanUse = true, bool ignoreHoldables = false, bool ignoreRedBubble = false)
 			: base(position, orientation, spritePath, playerCanUse, ignoreHoldables)
 		{
 			ignoreRedBoosters = ignoreRedBubble;
+			this.spikesOutline = spikesOutline;
 			AddSpikes(spikesPath);
 		}
 
@@ -25,6 +28,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			: base(data, offset, ClassName)
 		{
 			ignoreRedBoosters = data.Bool("ignoreRedBoosters", false);
+			this.spikesOutline = data.Bool("spikesOutline", false);
 			AddSpikes(data.String("spikesPath"));
 		}
 
@@ -48,6 +52,15 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 				return;
 			}
 			base.OnCollide(player);
+		}
+
+		public override void Render()
+		{
+			if (spikesOutline)
+			{
+				spikes.DrawOutline();
+			}
+			base.Render();
 		}
 	}
 }

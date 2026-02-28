@@ -23,7 +23,8 @@ local function getPlacement(name, rotation, xOff, yOff, x, y)
       spikesPath = spritePath,
       playerCanUse = true,
       ignoreHoldables = false,
-      ignoreRedBoosters = false
+      ignoreRedBoosters = false,
+      spikesOutline = false
     }
   }
   return spring
