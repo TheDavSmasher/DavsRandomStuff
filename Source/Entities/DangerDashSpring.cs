@@ -56,11 +56,12 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 
 		public override void Render()
 		{
+			base.Render();
 			if (spikesOutline)
 			{
-				spikes.DrawOutline();
+				spikes.DrawSimpleOutline();
+				spikes.Render();
 			}
-			base.Render();
 		}
 	}
 }
