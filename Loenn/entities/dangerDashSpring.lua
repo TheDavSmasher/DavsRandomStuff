@@ -7,40 +7,37 @@ local springType =  modName .. "/DangerDashSpring"
 local springOpts = { "Up", "Left", "Down", "Right" }
 
 local function getOrientation(entity, offset)
-  local index = 1
-  for i,v in ipairs(springOpts) do
-    if (springType .. v) == entity._name then
-      index = i
-      break
+    local index = 1
+    for i,v in ipairs(springOpts) do
+        if (springType .. v) == entity._name then
+            index = i
+            break
+        end
     end
-  end
-  if offset == nil then
-    return index
-  end
-  return springOpts[(index + offset - 1) % 4 + 1]
+    if offset == nil then
+        return index
+    end
+    return springType .. springOpts[(index + offset - 1) % 4 + 1]
 end
 
 local function rotate(room, entity, direction)
-    local dir = getOrientation(entity)
-    local swap = entity.width
-    entity.height = entity.width
-    entity.width = swap
-    entity._name = getOrientation(entity, direction)
-    return true
+  entity._name = getOrientation(entity, direction)
+  return true
 end
 
 local function flip(room, entity, horizontal, vertical)
   if getOrientation(entity) % 2 == 0 then
     if horizontal then
       entity._name = getOrientation(entity, 2)
+      return horizontal
     end
-    return horizontal
+  else
+    if vertical then
+      entity._name = getOrientation(entity, 2)
+      return vertical
+    end
   end
-
-  if vertical then
-    entity._name = getOrientation(entity, 2)
-  end
-  return vertical
+  return false
 end
 
 local function getPlacement(name, rotation, xOff, yOff, x, y)
