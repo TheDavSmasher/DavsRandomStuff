@@ -33,8 +33,10 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 				Get<PufferCollider>().Collider = new Hitbox(16f, 10f, -8f, 0f);
 				sprite.Rotation = (float)Math.PI;
 			}
+			staticMover.OnShake = OnShake;
 			staticMover.OnEnable = OnEnable;
 			staticMover.OnDisable = OnDisable;
+			wiggler.onChange += OnWiggleChange;
 		}
 
 		public GeneralSpring(EntityData data, Vector2 offset, string nameFormat)
@@ -105,6 +107,14 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 		protected new virtual void OnDisable()
 		{
 			base.OnDisable();
+		}
+
+		protected virtual void OnShake(Vector2 amount)
+		{
+		}
+
+		protected virtual void OnWiggleChange(float v)
+		{
 		}
 
 		protected new virtual void OnHoldable(Holdable h)
