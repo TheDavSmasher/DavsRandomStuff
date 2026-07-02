@@ -53,7 +53,8 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			if (player.StateMachine.State == Player.StDreamDash || !playerCanUse)
 				return;
 
-			if (ignoreRedBoosters && player.StateMachine.State == Player.StRedDash || !player.DashAttacking)
+			if (ignoreRedBoosters && player.StateMachine.State == Player.StRedDash ||
+				!player.DashAttacking && (!killAsSpikes || CanBounceAnimate(player)))
 			{
 				player.Die((player.Position - Position).SafeNormalize());
 				return;
