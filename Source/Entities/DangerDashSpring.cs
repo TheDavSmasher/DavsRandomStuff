@@ -17,6 +17,8 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 
 		private Vector2 spikesOffset;
 
+		private Color spikesEnabled = Color.White;
+
 		private const string ClassName = "DavsRandomStuff/DangerDashSpring";
 
 		public DangerDashSpring(Vector2 position, Orientations orientation, string spritePath, string spikesPath,
@@ -50,10 +52,19 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			spikes.Origin -= Vector2.UnitY;
 		}
 
+		protected override void OnPlatformAttach(Platform p)
+		{
+			if (p is CassetteBlock cassette)
+			{
+				spikesEnabled = cassette.color;
+				spikes.Color = cassette.color;
+			}
+		}
+
 		protected override void OnEnable()
 		{
 			base.OnEnable();
-			spikes?.Color = Color.White;
+			spikes?.Color = spikesEnabled;
 		}
 
 		protected override void OnDisable()
