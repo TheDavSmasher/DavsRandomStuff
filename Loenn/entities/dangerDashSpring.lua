@@ -63,6 +63,7 @@ local function getPlacement(name, rotation, xOff, yOff, x, y)
       playerCanUse = true,
       ignoreHoldables = false,
       ignoreRedBoosters = false,
+      killAsSpikes = false,
       spikesOutline = false
     }
   }

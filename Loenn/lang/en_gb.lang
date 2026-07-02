@@ -3,3 +3,8 @@ entities.DavsRandomStuff/DangerDashSpringUp.placements.name.up=Danger Dash Sprin
 entities.DavsRandomStuff/DangerDashSpringDown.placements.name.down=Danger Dash Spring (Down)
 entities.DavsRandomStuff/DangerDashSpringRight.placements.name.right=Danger Dash Spring (Right)
 entities.DavsRandomStuff/DangerDashSpringLeft.placements.name.left=Danger Dash Spring (Left)
+
+entities.DavsRandomStuff/DangerDashSpringUp.attributes.description.killAsSpikes=Whether the spring should not kill the player if they are moving in the same direction of the spring.\nHorizontal springs will check for X speeds beyond 240, and vertical springs check non-zero Y speeds.
+entities.DavsRandomStuff/DangerDashSpringDown.attributes.description.killAsSpikes=Whether the spring should not kill the player if they are moving in the same direction of the spring.\nHorizontal springs will check for X speeds beyond 240, and vertical springs check non-zero Y speeds.
+entities.DavsRandomStuff/DangerDashSpringRigth.attributes.description.killAsSpikes=Whether the spring should not kill the player if they are moving in the same direction of the spring.\nHorizontal springs will check for X speeds beyond 240, and vertical springs check non-zero Y speeds.
+entities.DavsRandomStuff/DangerDashSpringLeft.attributes.description.killAsSpikes=Whether the spring should not kill the player if they are moving in the same direction of the spring.\nHorizontal springs will check for X speeds beyond 240, and vertical springs check non-zero Y speeds.
