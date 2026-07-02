@@ -48,6 +48,21 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			spikes.Origin -= Vector2.UnitY;
 		}
 
+		protected override void OnEnable()
+		{
+			base.OnEnable();
+			spikes.Color = Color.White;
+		}
+
+		protected override void OnDisable()
+		{
+			base.OnDisable();
+			if (VisibleWhenDisabled)
+			{
+				spikes.Color = DisabledColor;
+			}
+		}
+
 		protected override void OnCollide(Player player)
 		{
 			if (player.StateMachine.State == Player.StDreamDash || !playerCanUse)
