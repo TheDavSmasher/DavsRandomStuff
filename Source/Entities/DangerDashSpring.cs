@@ -15,6 +15,8 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 
 		public Sprite spikes;
 
+		private Vector2 spikesOffset;
+
 		private const string ClassName = "DavsRandomStuff/DangerDashSpring";
 
 		public DangerDashSpring(Vector2 position, Orientations orientation, string spritePath, string spikesPath,
@@ -77,13 +79,21 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			base.OnCollide(player);
 		}
 
+		protected override void OnShake(Vector2 amount)
+		{
+			spikesOffset += amount;
+		}
+
 		public override void Render()
 		{
 			base.Render();
-			if (spikesOutline)
+			if (spikesOutline && spikes != null)
 			{
-				spikes?.DrawSimpleOutline();
-				spikes?.Render();
+				Vector2 position = spikes.Position;
+				spikes.Position += spikesOffset;
+				spikes.DrawSimpleOutline();
+				spikes.Render();
+				spikes.Position = position;
 			}
 		}
 	}
