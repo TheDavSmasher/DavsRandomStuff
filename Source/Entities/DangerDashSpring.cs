@@ -51,7 +51,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 		protected override void OnEnable()
 		{
 			base.OnEnable();
-			spikes.Color = Color.White;
+			spikes?.Color = Color.White;
 		}
 
 		protected override void OnDisable()
@@ -59,7 +59,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			base.OnDisable();
 			if (VisibleWhenDisabled)
 			{
-				spikes.Color = DisabledColor;
+				spikes?.Color = DisabledColor;
 			}
 		}
 
@@ -82,8 +82,8 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			base.Render();
 			if (spikesOutline)
 			{
-				spikes.DrawSimpleOutline();
-				spikes.Render();
+				spikes?.DrawSimpleOutline();
+				spikes?.Render();
 			}
 		}
 	}
