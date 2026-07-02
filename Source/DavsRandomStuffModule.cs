@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Celeste.Mod.DavsRandomStuff.Entities;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace Celeste.Mod.DavsRandomStuff;
 
@@ -20,10 +22,28 @@ public class DavsRandomStuffModule : EverestModule {
     }
 
     public override void Load() {
-        // TODO: apply any hooks that should always be active
+		On.Celeste.CassetteBlock.UpdateVisualState += CassetteBlock_UpdateVisualState;
     }
 
-    public override void Unload() {
-        // TODO: unapply any hooks applied in Load()
+	public override void Unload() {
+        On.Celeste.CassetteBlock.UpdateVisualState -= CassetteBlock_UpdateVisualState;
     }
+
+	private void CassetteBlock_UpdateVisualState(On.Celeste.CassetteBlock.orig_UpdateVisualState orig, CassetteBlock self)
+	{
+        orig(self);
+
+		Vector2 scale = new Vector2(1f + self.wiggler.Value * 0.05f * self.wigglerScaler.X, 1f + self.wiggler.Value * 0.15f * self.wigglerScaler.Y);
+		foreach (CassetteBlock item3 in self.group)
+		{
+			foreach (StaticMover staticMover2 in item3.staticMovers)
+			{
+				if (staticMover2.Entity is not DangerDashSpring spikes)
+				{
+					continue;
+				}
+				spikes.spikes?.Scale = scale;
+			}
+		}
+	}
 }
