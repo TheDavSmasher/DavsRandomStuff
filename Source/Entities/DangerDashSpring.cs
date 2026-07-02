@@ -102,14 +102,19 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 		public override void Render()
 		{
 			base.Render();
-			if (spikesOutline && spikes != null)
+			if (spikes == null)
 			{
-				Vector2 position = spikes.Position;
-				spikes.Position += spikesOffset;
-				spikes.DrawSimpleOutline();
-				spikes.Render();
-				spikes.Position = position;
+				return;
 			}
+
+			Vector2 position = spikes.Position;
+			spikes.Position += spikesOffset;
+			if (spikesOutline)
+			{
+				spikes.DrawSimpleOutline();
+			}
+			spikes.Render();
+			spikes.Position = position;
 		}
 	}
 }
