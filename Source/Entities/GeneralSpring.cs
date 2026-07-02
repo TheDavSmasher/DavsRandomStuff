@@ -68,6 +68,12 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 					case Orientations.Floor:
 						player.SuperBounce(Top);
 						break;
+					case Orientations.WallLeft:
+						player.SideBounce(1, Right, CenterY);
+						break;
+					case Orientations.WallRight:
+						player.SideBounce(-1, Left, CenterY);
+						break;
 					case Ceiling:
 						player.SuperBounce(Bottom + player.Height);
 						player.varJumpSpeed = player.Speed.Y = 185f;
@@ -82,8 +88,8 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			return Orientation switch
 			{
 				Orientations.Floor => player.Speed.Y >= 0f,
-				Orientations.WallLeft => player.SideBounce(1, Right, CenterY),
-				Orientations.WallRight => player.SideBounce(-1, Right, CenterY),
+				Orientations.WallLeft => player.Speed.X <= 240f,
+				Orientations.WallRight => player.Speed.X >= -240f,
 				Ceiling => player.Speed.Y <= 0f,
 				_ => false
 			};
