@@ -36,6 +36,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			staticMover.OnShake = OnShake;
 			staticMover.OnEnable = OnEnable;
 			staticMover.OnDisable = OnDisable;
+			staticMover.OnAttach += OnPlatformAttach;
 			wiggler.onChange += OnWiggleChange;
 		}
 
@@ -114,6 +115,10 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 		}
 
 		protected virtual void OnWiggleChange(float v)
+		{
+		}
+
+		protected virtual void OnPlatformAttach(Platform p)
 		{
 		}
 
