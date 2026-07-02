@@ -57,7 +57,7 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			if (p is CassetteBlock cassette)
 			{
 				spikesEnabled = cassette.color;
-				spikes.Color = cassette.color;
+				spikes?.Color = cassette.color;
 			}
 		}
 
