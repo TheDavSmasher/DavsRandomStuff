@@ -46,6 +46,9 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 
 		protected override void OnCollide(Player player)
 		{
+			if (player.StateMachine.State == Player.StDreamDash || !playerCanUse)
+				return;
+
 			if (ignoreRedBoosters && player.StateMachine.State == Player.StRedDash || !player.DashAttacking)
 			{
 				player.Die((player.Position - Position).SafeNormalize());
