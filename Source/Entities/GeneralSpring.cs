@@ -33,6 +33,8 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 				Get<PufferCollider>().Collider = new Hitbox(16f, 10f, -8f, 0f);
 				sprite.Rotation = (float)Math.PI;
 			}
+			staticMover.OnEnable = OnEnable;
+			staticMover.OnDisable = OnDisable;
 		}
 
 		public GeneralSpring(EntityData data, Vector2 offset, string nameFormat)
@@ -93,6 +95,16 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 				Ceiling => player.Speed.Y <= 0f,
 				_ => false
 			};
+		}
+
+		protected new virtual void OnEnable()
+		{
+			base.OnEnable();
+		}
+
+		protected new virtual void OnDisable()
+		{
+			base.OnDisable();
 		}
 
 		protected new virtual void OnHoldable(Holdable h)
