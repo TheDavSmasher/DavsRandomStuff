@@ -1,5 +1,5 @@
 - Name: DavsRandomStuff
-  Version: 0.1.0
+  Version: 0.1.1
   DLL: bin/DavsRandomStuff.dll
   Dependencies:
     - Name: EverestCore
