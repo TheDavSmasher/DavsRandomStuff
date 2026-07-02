@@ -38,6 +38,37 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			staticMover.OnDisable = OnDisable;
 			staticMover.OnAttach += OnPlatformAttach;
 			wiggler.onChange += OnWiggleChange;
+
+			Collider extraCollider = null;
+			int dashLeniency = 4;
+			float offset = 0f;
+			int dir = 0;
+			switch (Orientation)
+			{
+				case Orientations.WallLeft:
+					extraCollider = Collider.Clone();
+					offset = extraCollider.Width;
+					dir = +1;
+					break;
+				case Orientations.WallRight:
+					extraCollider = Collider.Clone();
+					offset = -dashLeniency;
+					dir = -1;
+					break;
+			}
+			if (extraCollider != null)
+			{
+				extraCollider.Position.X += offset;
+				extraCollider.Width = dashLeniency;
+				Add(new PlayerCollider(player =>
+				{
+					if (player.DashAttacking && player.Speed.X * dir >= Player.DashSpeed)
+					{
+						OnCollide(player);
+					}
+				},
+				extraCollider));
+			}
 		}
 
 		public GeneralSpring(EntityData data, Vector2 offset, string nameFormat)
