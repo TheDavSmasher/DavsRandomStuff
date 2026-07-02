@@ -58,10 +58,6 @@ namespace Celeste.Mod.DavsRandomStuff.Entities
 			{
 				spikesEnabled = cassette.color;
 				spikes.Color = cassette.color;
-
-				Vector2 vector = cassette.groupOrigin - Position;
-				spikes.Origin = spikes.Origin + vector - spikes.Position;
-				spikes.Position = vector;
 			}
 		}
 
